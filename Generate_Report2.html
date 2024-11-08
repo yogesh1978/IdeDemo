@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Diagrams</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            text-align: left; /* Left-align text */
+            color: #333; /* Dark gray text color for better contrast */
+        }
+        h2 {
+            color: orange; /* Set heading color to orange */
+        }
+        h3 {
+            color: #333; 
+            font-weight: normal;
+        }
+        .loading {
+            font-size: 15px;
+
+            margin-top: 20px;
+
+            align-items: center; /* Center vertically */
+        }
+        .alcntr {
+            align-items: center;
+            text-align: center;
+        }
+        .loader {
+            border: 6px solid #f3f3f3; /* Light grey */
+            border-top: 6px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 18px; /* Reduced size */
+            height: 18px; /* Reduced size */
+            animation: spin 1s linear infinite;
+            margin-right: 10px; /* Space between loader and text */
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .smaller {
+            font-size: 15px;
+        }
+    </style>
+    <script>
+    function sendData(diagramTypes) {
+		//alert("hi");
+    var gitUrl = document.getElementById('gitUrl').value;
+    var pat = document.getElementById('pat').value;
+    var branchName = document.getElementById('branchName').value;
+
+    document.getElementById('response').innerHTML = ''; // Clear previous responses
+
+    var responsesReceived = 0;
+
+    for (var i = 0; i < diagramTypes.length; i++) {
+        (function(diagramType) { // Use a closure to capture the current value of diagramType
+            var data = {
+                 "projectDetails": "Project summary prepared by Sasva\n\nGit Repo Details\n\n \n{\n \n    \"Project_Details\": null\n \n}\n \n\n\n \n### Project Description:\n \nThe project is a web-based application designed to assist users in selecting cars based on their preferences through a questionnaire. The application leverages FastAPI for backend services, providing endpoints to handle user interactions, question management, and result compilation. The data is stored in JSON files, making it easily accessible and modifiable. The application is containerized using Docker, ensuring consistency across different environments and simplifying deployment processes.\n \n### Features:\n \n1. **User Management**: Allows for adding, updating, and retrieving user information from a JSON file.\n \n2. **Questionnaire Handling**: Manages a series of questions related to car purchasing preferences, such as model, budget, and fuel type. Questions and their alternatives are stored and retrieved from JSON files.\n \n3. **Answer Submission**: Users can submit their answers to the questions, which are then stored in a JSON file linking users to their chosen alternatives.\n \n4. **Results Compilation**: Based on the answers submitted, the system compiles results and suggests cars that match user preferences, utilizing data from a dedicated JSON file.\n \n5. **Docker Integration**: The application can be run as a Docker container, which encapsulates the environment and dependencies, making it easy to deploy and scale.\n \n### Technical Specification:\n \n- **Backend**: The application is built using FastAPI, a modern, fast (high-performance) web framework for building APIs with Python 3.7+ based on standard Python type hints.\n \n- **Data Storage**: Uses flat JSON files for storing data related to users, questions, alternatives, answers, and results.\n \n- **Testing**: Includes a suite of unit tests to ensure the API endpoints function as expected.\n \n- **Continuous Integration**: Utilizes CircleCI for continuous integration, automatically running tests and builds.\n \n- **Containerization**: Docker and Docker Compose are used for defining and running multi-container Docker applications. The `Dockerfile` sets up the Python environment and installs dependencies, while `docker-compose.yml` orchestrates the setup of the application and any other necessary services.\n \n### File Groups:\n \n- **Backend**:\n \n  - `app/__init__.py`\n \n  - `app/api/api.py`\n \n  - `app/db/models.py`\n \n  - `app/main.py`\n \n  - `test/__init__.py`\n \n  - `test/test.py`\n \n- **Data**:\n \n  - `data/alternatives.json`\n \n  - `data/answers.json`\n \n  - `data/cars.json`\n \n  - `data/questions.json`\n \n  - `data/results.json`\n \n  - `data/users.json`\n \n- **Configuration and Setup**:\n \n  - `.circleci/config.yml`\n \n  - `.gitignore`\n \n  - `Dockerfile`\n \n  - `docker-compose.yml`\n \n  - `requirements.txt`\n \n- **Documentation**:\n \n  - `README.md`\n \n### Folder Analysis:\n \n**Project Root Folder:**\n \nPurpose: Serves as the primary container for all project-related files, organizing them into specific sub-folders based on their functionality.\n \n**Sub-Folders:**\n \n- **app**: Contains the core application code.\n \n  - `__init__.py`: Initializes the Python package.\n \n  - **api**: Contains the API logic.\n \n    - `api.py`: Manages data interactions for users, questions, and results.\n \n  - **db**: Handles data model definitions.\n \n    - `models.py`: Defines Pydantic models for validating data.\n \n  - `main.py`: Sets up the FastAPI application and routes.\n \n- **data**: Stores JSON files used as the database.\n \n  - `alternatives.json`: Lists alternatives for questions.\n \n  - `answers.json`: Stores user responses.\n \n  - `cars.json`: Contains data about cars.\n \n  - `questions.json`: Holds questions for the questionnaire.\n \n  - `results.json`: Compiles results of user choices.\n \n  - `users.json`: Manages user data.\n \n- **test**: Contains tests for the application.\n \n  - `__init__.py`: Initializes the test package.\n \n  - `test.py`: Includes tests for API endpoints.\n \n**Configuration and Setup Files:**\n \n- `.circleci/config.yml`: Configures CircleCI for continuous integration.\n \n- `.gitignore`: Specifies untracked files for Git.\n \n- `Dockerfile`: Defines the Docker container environment.\n \n- `docker-compose.yml`: Manages Docker services.\n \n- `requirements.txt`: Lists dependencies for the project.\n \n**Documentation Files:**\n \n- `README.md`: Provides setup and usage instructions.\n \nThis structure ensures that each component of the project is easily accessible and maintainable, facilitating effective development and deployment processes.\n \n\n Inspecting most important project files ...\n \n```json\n \n{\n \n  \"files\": [\n \n    \".circleci/config.yml\",\n \n    \"Dockerfile\",\n \n    \"README.md\",\n \n    \"app/main.py\",\n \n    \"app/db/models.py\",\n \n    \"docker-compose.yml\",\n \n    \"requirements.txt\"\n \n  ]\n \n}\n \n```\n \n\n Describing file .circleci/config.yml ...\n \n{\n \n    \"summary\": \"This YAML file configures continuous integration workflows for a project using CircleCI, specifically focusing on running unit tests in a Python environment.\",\n \n    \"detailedsummary\": \"The '.circleci/config.yml' file is a configuration file for CircleCI, a continuous integration and delivery platform. This file defines a version 2 CircleCI configuration. It specifies a job named 'unit_test' that runs in a Docker container using the 'circleci/python:3.6.1' image. The job sets up a working directory, checks out the code, restores cached dependencies, installs dependencies from 'requirements.txt' using a Python virtual environment, caches these dependencies, and finally runs unit tests using pytest on 'test/test.py'. The workflow named 'build' is also defined to execute the 'unit_test' job.\",\n \n    \"importance\": \"High\",\n \n    \"references\": [\n \n        \"requirements.txt\",\n \n        \"test/test.py\"\n \n    ]\n \n}\n \n\n \n Describing file .gitignore ...\n \n```json\n \n{\n \n    \"summary\": \"The .gitignore file specifies intentionally untracked files that Git should ignore. It includes patterns for various operating systems, development environments, and programming languages.\",\n \n    \"detailedsummary\": \"The .gitignore file in a Git repository is used to ensure that certain files not tracked by Git remain untracked. This particular .gitignore file includes ignore patterns for files and directories that are specific to Linux, macOS, Windows, Python development, PyCharm, and Visual Studio Code. These patterns help prevent system-specific files like .DS_Store (macOS) or Thumbs.db (Windows), as well as development-specific files like .idea/ (PyCharm) and .vscode/ (Visual Studio Code), from being included in the repository. This helps in keeping the repository clean and preventing the inclusion of unnecessary files that can clutter the repository or contain sensitive or non-shareable content.\",\n \n    \"importance\": \"High\",\n \n    \"references\": []\n \n}\n \n```\n \n\n \n Describing file Dockerfile ...\n \n{\n \n    \"summary\": \"This Dockerfile is used to create a Docker image for a Python-based application, setting up the environment, installing dependencies, and copying the project files.\",\n \n    \"detailedsummary\": \"The Dockerfile starts by pulling a Python 3.8.1 image based on Alpine Linux as the base image. It sets a working directory at /src within the container. Environment variables are set to prevent Python from writing .pyc files and to ensure that Python output is unbuffered. The Dockerfile then copies a requirements.txt file into the container, installs necessary system dependencies and Python packages as specified in requirements.txt, and cleans up the cache to reduce the image size. Finally, it copies the entire project directory into the container. This setup is crucial for creating a reproducible environment for development or production.\",\n \n    \"importance\": \"High\",\n \n    \"references\": [\n \n        \"requirements.txt\"\n \n    ]\n \n}\n \n\n \n Describing file README.md ...\n \n```json\n \n{\n \n    \"summary\": \"This README.md file provides a comprehensive guide on setting up and running a FastAPI project, including instructions for local and Docker-based setups.\",\n \n    \"detailedsummary\": \"The README.md file serves as a detailed manual for the 'fastapi-example' project. It includes badges for build status, prerequisites like Python 3, and steps to clone the project. Detailed instructions are provided for setting up the environment, running the server locally using Uvicorn, and executing tests with pytest. Additionally, it covers Docker usage for running the server and tests, and provides a link to the API documentation accessible via Swagger UI. The file also includes a command to access the PostgreSQL database using Docker.\",\n \n    \"importance\": \"High\",\n \n    \"references\": [\n \n        \"app/main.py\",\n \n        \"app/test.py\",\n \n        \"test/test.py\",\n \n        \"requirements.txt\"\n \n    ]\n \n}\n \n```\n \n\n \n Describing file app/api/api.py ...\n \n```json\n \n{\n \n    \"summary\": \"This file defines functions to read and manipulate data related to users, questions, alternatives, and results from JSON files.\",\n \n    \"detailedsummary\": \"The file 'api.py' contains several functions that interact with JSON files to perform CRUD operations for a quiz-like application. Functions include reading user data, fetching questions by position, retrieving alternatives for a given question, creating answers based on user input, and reading results for a specific user. Each function opens and reads a specific JSON file (users, questions, alternatives, cars, results), processes the data, and returns relevant information based on the function's purpose. The create_answer function is particularly complex, involving matching answers to cars based on criteria.\",\n \n    \"importance\": \"High\",\n \n    \"references\": [\n \n        \"data/users.json\",\n \n        \"data/questions.json\",\n \n        \"data/alternatives.json\",\n \n        \"data/cars.json\",\n \n        \"data/results.json\"\n \n    ]\n \n}\n \n```\n \n\n \n Describing file app/db/models.py ...\n \n{\n \n    \"summary\": \"This file defines data models using Pydantic for handling answers and user answers in a database context.\",\n \n    \"detailedsummary\": \"The file 'app/db/models.py' contains definitions of two data models using the Pydantic library, which are essential for validating and managing data related to user responses in an application. The first model, 'Answer', includes fields for 'question_id' and 'alternative_id', representing a specific answer to a question. The second model, 'UserAnswer', includes a 'user_id' and a list of 'Answer' objects, representing all answers provided by a single user. These models are crucial for ensuring data integrity and proper data structure throughout the application.\",\n \n    \"importance\": \"High\",\n \n    \"references\": [\n \n        \"pydantic.py\"\n \n    ]\n \n}\n \n\n \n Describing file app/main.py ...\n \n{\n \n    \"summary\": \"This Python file defines a FastAPI application with routes for user interactions, question handling, and results management.\",\n \n    \"detailedsummary\": \"The file 'app/main.py' is a central part of a FastAPI web application. It sets up the web server and defines various HTTP endpoints for operations such as retrieving and posting user data, questions, and answers. The routes include basic read operations for users and questions, as well as posting answers and fetching results based on user IDs. Error handling is incorporated using HTTPException for routes where data may not be found. The use of models for data handling and separation of logic into different modules (like 'api') suggests a clean architecture aimed at maintainability and scalability.\",\n \n    \"importance\": \"High\",\n \n    \"references\": [\n \n        \"app/db/models/UserAnswer.py\",\n \n        \"app/api/api.py\"\n \n    ]\n \n}\n \n\n \n Describing file data/alternatives.json ...\n \n{\n \n    \"summary\": \"This JSON file contains a list of alternatives associated with different question IDs, used for mapping responses in a survey or questionnaire.\",\n \n    \"detailedsummary\": \"The file 'data/alternatives.json' serves as a data store for alternatives or options that can be selected in response to specific questions in a survey or questionnaire. Each entry in the array is an object that includes an 'id' for the alternative itself, a 'question_id' that links the alternative to a specific question, and the 'alternative' text which is the option presented to the user. This structured format allows for easy retrieval and management of survey data, facilitating dynamic survey generation and response analysis based on the question and alternative IDs.\",\n \n    \"importance\": \"High\",\n \n    \"references\": []\n \n}\n \n\n \n Describing file data/answers.json ...\n \n{\n \n    \"summary\": \"This JSON file stores user responses to various questions, mapping user IDs to question IDs and selected alternatives.\",\n \n    \"detailedsummary\": \"The file 'data/answers.json' is a JSON formatted data file that contains an array of objects. Each object represents a user's answer to a question, identifying the user, the question, and the chosen alternative. The structure includes 'user_id' to identify the user, 'question_id' to specify the question, and 'alternative_id' to indicate the selected answer option. This data can be used to analyze user responses, calculate scores, or provide personalized feedback based on the answers submitted.\",\n \n    \"importance\": \"Medium\",\n \n    \"references\": []\n \n}\n \n\n \n Describing file data/cars.json ...\n \n{\n \n    \"summary\": \"This JSON file contains a list of cars with attributes such as id, name, fuel type, price category, and category type. It serves as a data store.\",\n \n    \"detailedsummary\": \"The file 'data/cars.json' is structured as an array of objects, each representing a car. Each object includes properties like 'id' (a unique identifier for each car), 'name' (the model of the car), 'fuel' (type of fuel the car uses), 'price' (categorized as low, average, or high), 'category' (type of car such as compact, sporting, or SUV), and 'link' (a placeholder for a potential link to more information). This file acts as a static data source that can be used to retrieve information about various car models, primarily focusing on electric and bio-fuel vehicles, with a few fossil-fuel options.\",\n \n    \"importance\": \"Medium\",\n \n    \"references\": []\n \n}\n \n\n \n Describing file data/questions.json ...\n \n{\n \n    \"summary\": \"This JSON file stores a list of questions related to car purchasing preferences, including model, budget, and fuel type.\",\n \n    \"detailedsummary\": \"The file 'data/questions.json' contains an array of objects, each representing a different question to be presented to a user, presumably in a survey or form context. Each object includes an 'id' to uniquely identify the question, a 'position' to specify the order in which the question should be asked, and the 'question' text itself. The questions are designed to gather information about a user's preferences in purchasing a car, such as the desired car model or category, budget for the new car, and preferred type of fuel.\",\n \n    \"importance\": \"Medium\",\n \n    \"references\": []\n \n}\n \n\n \n Describing file data/results.json ...\n \n{\n \n    \"summary\": \"This JSON file stores data about users and their associated car IDs.\",\n \n    \"detailedsummary\": \"The file 'data/results.json' contains a JSON array where each element is an object representing a user. Each object includes a 'user_id' that uniquely identifies a user, and a 'cars' array that lists IDs of cars associated with that user. This structure is typically used to store and retrieve user-specific data efficiently, possibly for operations like querying user profiles or their possessions in a system where user and car data is interconnected.\",\n \n    \"importance\": \"Medium\",\n \n    \"references\": []\n \n}\n \n\n \n Describing file data/users.json ...\n \n{\n \n    \"summary\": \"This JSON file stores a list of user data, including IDs, names, email addresses, and phone numbers.\",\n \n    \"detailedsummary\": \"The file 'data/users.json' contains an array of objects, each representing a user. Each user object includes an 'id' (integer), 'name' (string), 'mail' (string representing an email address), and 'phone' (string representing a phone number). This data structure is typically used to store and retrieve user information in applications, serving as a data source or a mock database for development and testing purposes.\",\n \n    \"importance\": \"Medium\",\n \n    \"references\": []\n \n}\n \n\n \n Describing file docker-compose.yml ...\n \n{\n \n    \"summary\": \"This file configures services for a web application and its database using Docker Compose, specifying how containers should be built, connected, and run.\",\n \n    \"detailedsummary\": \"The 'docker-compose.yml' file is a configuration file used by Docker Compose to define and run multi-container Docker applications. In this file, two services are defined: 'app' and 'db'. The 'app' service builds a Docker image from the current directory and runs it, exposing it on port 8002 and linking it to a PostgreSQL database running in another container. The 'db' service uses a pre-built PostgreSQL image and sets up environment variables for the database credentials. Volumes are used to persist data and mount code into the app container. This setup is typical for development environments where code changes need to be quickly tested and deployed.\",\n \n    \"importance\": \"High\",\n \n    \"references\": []\n \n}\n \n\n \n Describing file requirements.txt ...\n \n{\n \n    \"summary\": \"This file specifies the versions of external libraries required for the project, ensuring consistent environments across different setups.\",\n \n    \"detailedsummary\": \"The 'requirements.txt' file is crucial for Python projects as it lists all the necessary external libraries along with their specific versions to be installed using pip. This file includes FastAPI for building APIs, Uvicorn as an ASGI server, Pytest for running tests, and Requests for making HTTP requests. By pinning each library to a specific version, it helps in avoiding conflicts and ensuring that the development, testing, and production environments are consistent and predictable.\",\n \n    \"importance\": \"High\",\n \n    \"references\": []\n \n}\n \n\n \n Describing file test/test.py ...\n \n{\n \n    \"summary\": \"This Python file contains a suite of tests for an API built with FastAPI, focusing on various endpoints like main, user, question, alternatives, answer, and result.\",\n \n    \"detailedsummary\": \"The file 'test/test.py' is dedicated to testing the functionality of a FastAPI application. It uses the starlette TestClient to send HTTP requests to the app and asserts the responses. The tests cover basic GET requests to endpoints such as '/', '/user', '/question/1', and '/alternatives/1', as well as a POST request to '/answer'. Each test checks for correct status codes and appropriate response content, ensuring that the API behaves as expected under various conditions. This includes handling both valid and invalid requests, and verifying the structure and data of the JSON responses returned by the API.\",\n \n    \"importance\": \"High\",\n \n    \"references\": [\n \n        \"app/main.py\"\n \n    ]\n \n}\n \n\n \n\n\nEnd of the report",
+"diagramType": diagramType
+            };
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://10.206.60.134:8006/generate_diagram', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            xhr.onload = function() {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    var response = JSON.parse(xhr.responseText);
+                    console.log('Response:', response);
+
+                    var diagramContent = response.diagram
+                        .replace(/\\n/g, '\n')
+                        .replace(/&/g, '&amp;')
+                        .replace(/</g, '&lt;')
+                        .replace(/>/g, '&gt;');
+
+                    var responseDiv = document.getElementById('response');
+                    if (responseDiv) {
+                        responseDiv.innerHTML += '<h3>' + diagramType + ':</h3><pre class="alcntr">' + diagramContent + '</pre>';
+                    } else {
+                        console.error('Element with ID "response" not found.');
+                    }
+                } else {
+                    console.error('Request failed with status:', xhr.status);
+                }
+
+                // Increment response count and hide loader when all responses are received
+                responsesReceived++;
+                if (responsesReceived === diagramTypes.length) {
+                    document.getElementById('loader').style.display = 'none';
+                }
+            };
+
+            xhr.onerror = function() {
+                console.error('Network error occurred.');
+            };
+            xhr.send(JSON.stringify(data));
+        })(diagramTypes[i]); // Pass current diagram type to the closure
+    }
+}
+
+function generateDiagrams() {
+    //alert('generateDiagrams function called'); // Debugging alert
+    var checkboxes = document.getElementsByName('diagramType');
+    var selectedTypes = [];
+
+    for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+            selectedTypes.push(checkboxes[i].value);
+        }
+    }
+
+    if (selectedTypes.length > 0) {
+	    document.getElementById('loader').style.display = 'flex'; // Show loader
+        sendData(selectedTypes); // Call sendData with selected diagram types
+    } else {
+        alert('Please select at least one diagram type.'); // Alert if no types are selected
+    }
+}
+
+    </script>
+</head>
+<body>
+    <h2>Generating Project Diagrams For:</h2>
+    
+    <div>
+        <label for="gitUrl">GitHub URL:</label>
+        <input type="text" id="gitUrl" name="gitUrl" required><br><br>
+
+        <label for="pat">Personal Access Token (PAT):</label>
+        <input type="text" id="pat" name="pat" required><br><br>
+
+        <label for="branchName">Branch Name:</label>
+        <input type="text" id="branchName" name="branchName" required><br><br>
+
+        <h3>Select Diagram Types:</h3>
+        <input type="checkbox" name="diagramType" value="Class Diagram">Class Diagram<br>
+        <input type="checkbox" name="diagramType" value="Sequence Diagram">Sequence Diagram<br>
+        <input type="checkbox" name="diagramType" value="Activity Diagram">Activity Diagram<br>
+        <input type="checkbox" name="diagramType" value="Component Diagram">Component Diagram<br>
+        <input type="checkbox" name="diagramType" value="ER Diagram">ER Diagram<br>
+        <input type="checkbox" name="diagramType" value="Use Case Diagram">Use Case Diagram<br>
+        <input type="checkbox" name="diagramType" value="All Of Above">All Of Above<br><br>
+
+        <button onclick="generateDiagrams()">Generate Diagrams</button>
+    </div>
+
+    <div class="loading" id="loader" style="display:none;"> <!-- Hide loader by default -->
+        <div class="loader"></div>
+        <p>Generating Project Diagrams...</p>
+    </div>
+    <div id="response"></div>
+</body>
+</html>
